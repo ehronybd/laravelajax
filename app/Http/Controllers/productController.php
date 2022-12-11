@@ -26,12 +26,12 @@ class productController extends Controller
            'name.unique'=>'Name Is Exists',
            'price.required'=>'Price Is Required',
        ]
-     
+
        );
 
-       $pruduct = new Product();
-       $pruduct->name = $request->name;
-       $pruduct->price = $request->price;
+       $product = new Product();
+       $product->name = $request->name;
+       $product->price = $request->price;
        $product->save();
        return response()->json([
            'status'=>'Success',
@@ -51,14 +51,14 @@ class productController extends Controller
            'up_name.unique'=>'Name Is Exists',
            'up_price.required'=>'Price Is Required',
        ]
-     
+
        );
 
        Product::where('id',$request->up_id)->update([
            'name'=>$request->up_name,
            'price'=>$request->up_price,
        ]);
-      
+
        return response()->json([
            'status'=>'Success',
        ]);
@@ -67,7 +67,7 @@ class productController extends Controller
       //delete product
       public function deleteProduct(Request $request){
           Product::find($request->product_id)->delete();
-      
+
        return response()->json([
            'status'=>'Success',
        ]);
@@ -92,7 +92,7 @@ class productController extends Controller
         ->paginate(5);
 
         if($product->count() >=1 ){
-            return view('pagination_product',compact('products'))->render();
+            return view('pagination_product',compact('product'))->render();
 
         }else{
             return response()->json([
